@@ -14,16 +14,20 @@ export class Sword extends Weapon {
   }
 
   public polish(): void {
-    const baseDamage = this.getBaseDamage(); //10
-    const damageLimit = baseDamage * 0.25; //2.5
+    const baseDamage = this.getBaseDamage();
+    const damageLimit = baseDamage * 0.25;
     const damageModifier = this.getDamageModifier();
 
-    if (damageModifier < damageLimit) {
-      if (damageModifier + this.MODIFIER_CHANGE_RATE > damageModifier) {
+if (damageModifier < damageLimit) {
+  if ((damageModifier + this.getModifierRate()) > damageLimit) {
         this.setDamageModifier(damageLimit);
+        console.log(`Your ${this.getName()} is polished to the max value now. Value of damageModifier is ${this.getDamageModifier().toFixed(2)}.`);
       } else {
-        this.setDamageModifier(damageModifier + this.MODIFIER_CHANGE_RATE);
+        this.setDamageModifier(damageModifier + this.getModifierRate());
+        console.log(`Your ${this.getName()} was polished. Value of damageModifier is ${this.getDamageModifier().toFixed(2)}.`);
       }
+    } else {
+      console.log(`Your ${this.getName()} is polished enough. Value of damageModifier is ${this.getDamageModifier().toFixed(2)}.`);
     }
   }
 }

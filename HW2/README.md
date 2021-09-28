@@ -1,3 +1,5 @@
+--- use ts-node usage.ts to execute usage.ts file ---
+
 The Home Task can be done using Typescript or less preferable (try to avoid) Vanilla JS.
 
 Check the UML representation of a set of classes that represent the inventory and various types of items. Methods and classes where you are providing an implementation are shown in bold.

@@ -25,7 +25,6 @@ export abstract class Consumable extends Item {
     this.spoiled = spoiled || false;
     this.consumed = false;
   }
-  
   public eat(): string {
     const defaultMessage = `You eat the ${this.getName()}.`;
 

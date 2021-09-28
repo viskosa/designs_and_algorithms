@@ -18,11 +18,15 @@ export class Bow extends Weapon {
     const effectiveDurability = this.getDurability(); // should be not more than 1
 
     if (effectiveDurability < 1) {
-      if (baseDurability + durabilityModifier + this.MODIFIER_CHANGE_RATE > durabilityLimit) {
+      if (baseDurability + durabilityModifier + this.getModifierRate() > durabilityLimit) {
         this.setDurabilityModifier(durabilityLimit);
+        console.log(`Your ${this.getName()} is polished to the max value now. Value of durabilityModifier is ${this.getDurabilityModifier().toFixed(2)}.`);
       } else {
-        this.setDurabilityModifier(durabilityModifier + this.MODIFIER_CHANGE_RATE);
+        this.setDurabilityModifier(durabilityModifier + this.getModifierRate());
+        console.log(`Your ${this.getName()} was polished. Value of durabilityModifier is ${this.getDurabilityModifier().toFixed(2)}.`);
       }
+    } else {
+      console.log(`Your ${this.getName()} is polished enough. Value of durabilityModifier is ${this.getDurabilityModifier().toFixed(2)}.`);
     }
   }
 }

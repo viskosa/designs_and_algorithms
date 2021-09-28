@@ -17,7 +17,7 @@ export class Pizza extends Consumable {
         this.setConsumed(true);
       }
 
-      return "You eat a slice of pizza"
+      return super.eat(); // is this right decision to call super's eat method?
     } else {
       return this.use();
     }

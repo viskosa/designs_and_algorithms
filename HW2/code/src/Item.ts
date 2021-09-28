@@ -33,6 +33,10 @@ export abstract class Item implements Comparable<Item> {
 
     public abstract use(): void
 
+    public abstract polish(): void
+
+    public abstract eat(): void
+
     public toString(): string {
         return `${this.name} - Value: ${this.value}, Weight: ${this.weight.toFixed(2)}`
     }

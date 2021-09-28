@@ -51,6 +51,10 @@ export abstract class Weapon extends Item {
   }
 
   // getters
+  public getModifierRate(): number {
+    return this.MODIFIER_CHANGE_RATE
+  }
+
   public getDamage(): number {
     return this.effectiveDamage
   }
@@ -67,9 +71,6 @@ export abstract class Weapon extends Item {
     return this.effectiveDurability
   }
 
-  // public getModifier(): number {
-  //   return this.effectiveDurability
-  // }
   public getBaseDurability(): number {
     return this.baseDurability
   }
@@ -88,8 +89,7 @@ export abstract class Weapon extends Item {
   }
 
   public toString(): string {
-    return `${this.getName()} − Value: ${this.getValue()}, Weight: ${this.getWeight().toFixed(2)}, 
-      Damage: ${this.effectiveDamage.toFixed(2)}, Durability: ${(this.effectiveDurability * 100).toFixed(2)}%`
+    return `${this.getName()} − Value: ${this.getValue()}, Weight: ${this.getWeight().toFixed(2)}, Damage: ${this.effectiveDamage.toFixed(2)}, Durability: ${(this.effectiveDurability * 100).toFixed(2)}%`
   }
 
   public use(): string {
