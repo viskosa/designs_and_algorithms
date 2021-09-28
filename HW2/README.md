@@ -1,4 +1,4 @@
---- use ts-node usage.ts to execute usage.ts file ---
+--- use `ts-node usage.ts` to execute usage.ts file ---
 
 The Home Task can be done using Typescript or less preferable (try to avoid) Vanilla JS.
 
