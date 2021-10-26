@@ -1,4 +1,4 @@
-import { Comparable } from './Comparable';
+import { Comparable } from '../interfaces/Comparable';
 
 let id = 0;
 

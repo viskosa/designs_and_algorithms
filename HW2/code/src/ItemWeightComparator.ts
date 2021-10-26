@@ -7,8 +7,8 @@
 // method of the first Item and return the resulting value.
 
 
-import { Item } from './Item';
-import { ItemComparator } from './ItemComparator';
+import { Item } from './abstracts/Item';
+import { ItemComparator } from './interfaces/ItemComparator';
 
 export class ItemWeightComparator implements ItemComparator {
     public compare(first: Item, second: Item) {

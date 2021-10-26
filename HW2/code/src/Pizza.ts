@@ -1,4 +1,4 @@
-import { Consumable } from "./Consumable";
+import { Consumable } from "./abstracts/Consumable";
 
 export class Pizza extends Consumable {
   numberOfSlices: number;

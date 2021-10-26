@@ -4,7 +4,7 @@
 // ●	Bow.polish(): This method increases the instance’s durabilityModifier by adding Weapon.MODIFIER_CHANGE_RATE. 
 // Any changes are capped such that effective durability is no larger than one (1).
 
-import { Weapon } from "./Weapon";
+import { Weapon } from "./abstracts/Weapon";
 
 export class Bow extends Weapon {
   constructor(baseDamage: number, baseDurability: number, value: number, weight: number) {

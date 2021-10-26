@@ -6,8 +6,8 @@
 
 // ●	Inventory.toString: return string representation of the item list (.join(‘, ’))
 
-import { Item } from "./Item";
-import { ItemComparator } from './ItemComparator';
+import { Item } from "./abstracts/Item";
+import { ItemComparator } from './interfaces/ItemComparator';
 
 export class Inventory {
   items: Item[] = [];
