@@ -1,22 +1,21 @@
-import { DataForView } from '../interfaces/data-for-view.interface';
+import { MappedData, DataForView } from '../interfaces/data-for-view.interface';
 
 export default abstract class View {
   constructor() {}
 
   public render(
-    data: DataForView[], 
+    data: MappedData, 
     template: (data: DataForView) => string
   ): void {
     const container = document.getElementById('render');
     if (!container) return;
 
     let str = '';
-    data.forEach((item: DataForView) => {
-      str += template(item)
-    });
+    for (let [_, value] of data) {
+      str += template(value)
+    }
     container.innerHTML = str;
   }
-  public abstract currencyHandler(event: any): void
 
   public getElement(id: string): HTMLInputElement {
     const element = document.getElementById(id);
@@ -37,4 +36,6 @@ export default abstract class View {
   public setText(id: string, value: string) {
     this.getElement(id).innerText = value;
   }
+
+  public abstract updateView (state: MappedData,): void
 }

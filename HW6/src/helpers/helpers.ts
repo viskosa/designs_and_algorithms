@@ -1,11 +1,15 @@
-import { DataForView } from '../interfaces/data-for-view.interface';
+import { DataForView, Response } from '../interfaces/data-for-view.interface';
 
-export const parseData = (arr: DataForView[]) => {
-  const mappedData = new Map();
+export const prepareData = (arr: Response[]) => {
+  return arr.map(item => {
+    const obj: DataForView = {
+      rate: item.buy,
+      base: "100",
+      target: (100 * +item.buy).toFixed(2),
+      base_currency: item.base_ccy,
+      target_currency: item.ccy
+    };
 
-  for (let i = 0; i < arr.length; i++) {
-    mappedData.set(arr[i].ccy, arr[i]);
-  }
-
-  return mappedData;
+    return obj;
+  })
 }

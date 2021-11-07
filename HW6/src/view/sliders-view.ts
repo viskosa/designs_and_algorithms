@@ -1,57 +1,43 @@
 import View from "./view";
-import { DataForView } from '../interfaces/data-for-view.interface';
+import { DataForView, MappedData } from '../interfaces/data-for-view.interface';
 
 class SlidersView extends View {
-  template = ({ ccy, base_ccy, buy }: DataForView) => {
+  template = ({ base_currency, target_currency, base, rate, target }: DataForView) => {
     return `
-      <fieldset class="panel margin--b-10" id="panel-${ccy}">
-        <legend class="panel__legend">${ccy}</legend>
+      <fieldset class="panel margin--b-10" id="panel-${target_currency}">
+        <legend class="panel__legend">${target_currency}</legend>
         <div class="fl fl--align-center margin--b-20">
-          <p class="margin--r-20">1 ${ccy} is 
-            <span id="rate-${ccy}">${Number(buy).toFixed(2)}</span> 
-            ${base_ccy}
+          <p class="margin--r-20">1 ${target_currency} is 
+            <span id="rate-${target_currency}">${Number(rate).toFixed(2)}</span> 
+            ${base_currency}
           </p>
         </div>
 
         <div class="fl fl--align-center">
           <div class="fl--dir-column margin--r-20">
-            <p class="margin--b-10">${base_ccy}: 
-              <span id="base-text-${ccy}"> </span>
+            <p class="margin--b-10">${base_currency}: 
+              <span id="base-text-${target_currency}">${base}</span>
             </p>
-            <input id="base-${ccy}" data-input="base" data-currency="${ccy}" class="panel__input" type="range" min="0" max=${1000 * Number(buy)} step="any" value=""/>
+            <input id="base-${target_currency}" data-input="base" data-currency="${target_currency}" class="panel__input" type="range" min="0" max=${5000 * Number(rate)} step="1" value="${base}"/>
           </div>
           <div class="fl--dir--column">
-            <p class="margin--b-10">${ccy}: 
-              <span id="target-text-${ccy}"> </span>
+            <p class="margin--b-10">${target_currency}: 
+              <span id="target-text-${target_currency}">${target}</span>
             </p>
-            <input id="target-${ccy}" data-input="target" data-currency="${ccy}" class="panel__input" type="range" min="0" max="1000" step="any" value=""/>
+            <input id="target-${target_currency}" data-input="target" data-currency="${target_currency}" class="panel__input" type="range" min="0" max="5000" step="1" value="${target}"/>
           </div>
         </div>
       </fieldset>`
   };
 
-  currencyHandler = (event: any) => { 
-    const { target: { value = "", dataset: { input = "", currency = "" } = {} } = {} } = event;
+  updateView = (state: MappedData) => {
+    for (let [key, object] of state) {
+      this.setText(`base-text-${key}`, object.base);
+      this.setText(`target-text-${key}`, object.target);
 
-    switch(input) {
-      case 'base':
-        const rateValue1 = this.getElement(`rate-${currency}`).innerText;
-        const converted1 = +(Number(value) / Number(rateValue1)).toFixed(2);
-
-        this.setText(`base-text-${currency}`, `${Number(value).toFixed(2)}`);
-        this.setText(`target-text-${currency}`, `${converted1}`);
-        this.setValue(`target-${currency}`, `${converted1}`);
-        break;
-
-      case 'target':
-        const rateValue2 = this.getElement(`rate-${currency}`).innerText;
-        const converted2 = +(Number(value) * Number(rateValue2)).toFixed(2);
-
-        this.setText(`target-text-${currency}`, `${Number(value).toFixed(2)}`);
-        this.setText(`base-text-${currency}`, `${converted2}`);
-        this.setValue(`base-${currency}`, `${converted2}`);
-        break;
-    }  
+      this.setValue(`base-${key}`, object.base);
+      this.setValue(`target-${key}`, object.target);
+    }
   }
 }
 

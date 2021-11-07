@@ -1,11 +1,13 @@
 import './styles/build.styl';
 import Controller from "./controller/controller";
+import State from "./model/state";
 
 window.addEventListener('DOMContentLoaded', async () => {
-  const controller = new Controller();
+  const state = new State();
+  const controller = new Controller(state);
 
   await controller.getData();
-  controller.setControlsListeners();
+  controller.setRadiobuttonsListeners();
   controller.initialRenderView();
   controller.setInputsListeners();
 })

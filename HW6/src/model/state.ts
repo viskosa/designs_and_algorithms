@@ -1,57 +1,27 @@
-// The Subject interface declares a set of methods for managing subscribers.
-export interface Subject {
-  // Attach an observer to the subject.
-  attach(observer: Observer): void;
+import { DataForView, MappedData } from '../interfaces/data-for-view.interface';
 
-  // Detach an observer from the subject.
-  detach(observer: Observer): void;
+export default class State {
+  state: MappedData;
 
-  // Notify all observers about an event.
-  notify(): void;
-}
-
-//The Observer interface declares the update method, used by subjects.
-export interface Observer {
-  // Receive update from subject.
-  update(subject: Subject): void;
-}
-
-
-export class StateManager<State> implements Subject {
-  private observers: Observer[] = [];
-  private state: {[Key in keyof State]: State[Key]};
-
-  constructor(initialState: State) {
-    this.state = {...initialState};
+  constructor() {
+    this.state = new Map<string, DataForView>();
   }
 
-  public attach(observer: Observer): void {
-    const isExist = this.observers.includes(observer);
-    if (isExist) {
-      return console.log('Subject: Observer has already been attached');
-    }
-
-    console.log('Subject: Observer is attached');
-    this.observers.push(observer);
-  }
-
-  public detach(observer: Observer): void {
-    // const observerIndex = this.observers.indexOf(observer);
-    // if (observerIndex === -1) {
-    //   return console.log('Subject: Nonexistent observer');
-    // }
-
-    // this.observers.splice(observerIndex, 1);
-    
-    this.observers = this.observers.filter(item => item != observer)
-    console.log('Subject: Observer is detached');
-  }
-
-
-  public notify(): void {
-    console.log('Subject: Notifying observers...');
-    for (const observer of this.observers) {
-      observer.update(this);
+  setState = (arr: DataForView[]): void => {
+    for (let item of arr) {
+      this.state.set(item.target_currency, item)
     }
   }
+
+  updateState = (key: string, value: any ): void => {
+    const currentValue = this.state.get(key);
+    this.state.set(key, {
+      ...currentValue, 
+      ...value 
+    })
+  }
+
+  getState = (): MappedData => this.state;
+
+  getValue = (key: string, subkey: any) => this.state.get(key)?.[subkey as keyof DataForView]
 }
