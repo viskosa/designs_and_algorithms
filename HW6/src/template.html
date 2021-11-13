@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <h1 class="margin--b-20 turn--center">Currency exchange</h1>
+
+    <form id="form-view-mode" class="fl fl--align-center margin--b-20">
+      <div class="radio fl fl--align-center margin--r-20">
+        <input id="inputs-view" class="radio__input" type="radio" value="inputs" name="view" checked>
+        <label for="inputs-view" class="radio__label">Inputs mode</label>
+      </div>
+      <div class="radio fl fl--align-center">
+        <input id="sliders-view" class="radio__input" type="radio" value="sliders" name="view">
+        <label for="sliders-view" class="radio__label">Sliders mode</label>
+      </div>
+    </form>
+
+    <form id="form-currency-mode" class="fl fl--align-center margin--b-20">
+      <div class="radio fl fl--align-center margin--r-20">
+        <input id="same-mode" class="radio__input" type="radio" value="same" name="mode" checked>
+        <label for="same-mode" class="radio__label">Same currency amount mode</label>
+      </div>
+      <div class="radio fl fl--align-center">
+        <input id="independent-mode" class="radio__input" type="radio" value="independent" name="mode">
+        <label for="independent-mode" class="radio__label">Independent currency amount mode</label>
+      </div>
+    </form>
+
+    <div id="render"></div>
+  </div>
+</body>
+</html>
