@@ -1,16 +1,22 @@
 import { createJob } from "./helpers/create-job.helper";
-import { sortJobs } from "./helpers/sort-jobs.helper";
+import PriorityQueue from "./src/priority-queue";
 
-const jobs = [];
+const priorityQueue = new PriorityQueue();
 
-for (let i = 0; i < 20; i++) {
-  jobs.push(createJob());
+for (let i = 0; i < 100; i++) {
+  priorityQueue.insert(createJob());
 }
 
-// console.log(jobs);
+priorityQueue.getQueue()
+console.log(priorityQueue.getHighestPriority());
+console.log(priorityQueue.getLowestPriority());
+priorityQueue.increasePriority(2, 0)
+priorityQueue.printQueue()
 
-const prioritizedJobs = sortJobs(jobs);
-
-for (let job of prioritizedJobs) {
-  job.task();
+const jobRunner = queue => {
+  for (let item of queue) {
+    item.task()
+  }
 }
+
+jobRunner(priorityQueue.getQueue());
